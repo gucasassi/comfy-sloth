@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comfy-back
+  namespace: comfy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comfy-back
+  template:
+    metadata:
+      labels:
+        app: comfy-back
+    spec:
+      containers:
+        - name: comfy-back
+          image: gucasassi/comfy-back:1.0.0
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-config
+                  key: app_port

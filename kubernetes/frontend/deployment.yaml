@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comfy-front
+  namespace: comfy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comfy-front
+  template:
+    metadata:
+      labels:
+        app: comfy-front
+    spec:
+      containers:
+        - name: comfy-front
+          image: gucasassi/comfy-front:1.0.0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 80

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: comfy-front
+  namespace: comfy
+spec:
+  selector:
+    app: comfy-front
+  ports:
+    - port: 80
+      targetPort: 80
